@@ -14,13 +14,16 @@ import {
   Link
 } from "react-router-dom";
 
-import Cart from './Cart'
+import Cart from './Cart';
+import { CartContext } from '../contexts/CartProvider';
+
 
 class Menu extends React.Component {
 
 
   render() {
     return (
+      
       <Router>
         <div>
           <Navbar color="light" light expand="sm">
@@ -30,7 +33,9 @@ class Menu extends React.Component {
                 <Link to="/">Home</Link>
               </NavItem>
               <NavItem className="ml-4">
-                <Link to="/cart">Cart (0)</Link>
+                <CartContext.Consumer>
+                  { ({products}) => <Link to="/cart">Cart ({products.length})</Link> }             
+                </CartContext.Consumer>
               </NavItem>
             </Nav>
           </Navbar>
